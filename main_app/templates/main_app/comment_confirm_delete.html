@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Delete Comment</h1>
+
+<h4 style="color: white">
+  Are you sure you want to delete this comment:
+  <span class="yellow-text">'{{object.comment}}'</span>
+</h4>
+
+<form action="" method="POST" class="#01579b light-blue darken-4">
+  {% csrf_token %}
+  <input type="submit" value="Submit" class="btn" />
+  <a href="{% url 'comments_detail' object.id %}" style="color: white"
+    >Cancel</a
+  >
+</form>
+
+{% endblock %}

@@ -1,0 +1,79 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Movie Collector</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/style.css' %}"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </head>
+  <body>
+    <header class="navbar-fixed">
+      <nav class="#d50000 red accent-4 white-text">
+        <div class="nav-wrapper">
+          <ul>
+            <li>
+              <a href="{% url 'home' %}" class="left brand-logo" id="logo">
+                Movie Collector</a
+              >
+            </li>
+          </ul>
+          <ul class="right">
+            <li><a href="{% url 'about' %}">What is Movie Collector?</a></li>
+
+            {% if user.is_authenticated %}
+            <li>
+              <a href="{% url 'movies_create' %}">Add Movie</a>
+            </li>
+            <li><a href="{% url 'index' %}">All Movies</a></li>
+            <li>
+              <a href="{% url 'comments_create' %}">Create Comment!</a>
+            </li>
+            <li>
+              <a href="{% url 'comments_index' %}">All Comments</a>
+            </li>
+            <li>
+              <a href="{% url 'logout' %}">Log Out</a>
+            </li>
+            <ul class="center">
+              <li>Hi {{user.username}}</li>
+            </ul>
+
+            {% else %}
+
+            <li>
+              <a href="{% url 'signup' %}">Sign Up</a>
+            </li>
+            <li>
+              <a href="{% url 'login' %}">Log In</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container">{% block content %} {% endblock %}</main>
+
+    <footer class="page-footer #d50000 red accent-4 white-text">
+      <div class="center">All Rights Reserved, &copy; 2022 Movie Collector</div>
+    </footer>
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-2.1.1.min.js"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </body>
+</html>

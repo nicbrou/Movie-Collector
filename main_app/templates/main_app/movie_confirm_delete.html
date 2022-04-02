@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Delete Movie</h1>
+
+<h4 style="color: white">
+  Are you sure you want to delete
+  <span class="yellow-text">{{ object.title }}</span>?
+</h4>
+
+<form
+  action=""
+  method="POST"
+  class="#01579b light-blue darken-4"
+  id="movie_form"
+>
+  {% csrf_token %}
+  <input type="submit" value="Yes - Delete!" class="btn" />
+  <a href="{% url 'detail' movie.id %}" style="color: white">Cancel</a>
+</form>
+{% endblock %}

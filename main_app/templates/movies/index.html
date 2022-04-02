@@ -1,0 +1,29 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Movie List</h1>
+
+{% for movie in movies %}
+<div class="card">
+  <a href="{% url 'detail' movie.id %}">
+    <div class="card-content">
+      <div class="flex-container">
+        <div>
+          <span class="card-title"><b>{{ movie.title }}</b></span>
+          <p>
+            <b>Synopsis:</b> <hr />
+            {{ movie.synopsis }}
+          </p>
+          <hr />
+          <p><b>Year:</b> {{ movie.year }}</p>
+        </div>
+        <hr/>
+        <div class="right">
+          <img width="130px" height="180px" src="{{movie.image}}" />
+        </div>
+      </div>
+    </div>
+  </a>
+</div>
+{% endfor %} {% endblock %}
+
+

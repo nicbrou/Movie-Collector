@@ -1,0 +1,109 @@
+
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Movie Details</h1>
+
+<div class="row">
+  <div class="col s12">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title"><b>{{ movie.title }}</b></span>
+          <p>
+            <b>Synopsis:</b> <hr />
+            {{ movie.synopsis }}
+          </p>
+          <hr />
+          <p><b>Year:</b> {{ movie.year }}</p>
+        </div>
+        <div class="flex-container">
+        <div class="right col s12">
+          <img width="130px" height="180px" src="{{movie.image}}" />
+        </div>
+        </div>
+      
+        <hr/>
+      <div class="card-action">
+        <a href="{% url 'movies_update' movie.id %}">Edit</a>
+        <a href="{% url 'movies_delete' movie.id %}">Delete</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col s12">
+    <form method="post" action="{% url 'add_viewing' movie.id %}" class="white striped">
+      {% csrf_token %}
+      {{ viewing_form.as_p }}
+      <input type="submit" class="btn waves effect" value="Add Viewing and Movie Snack">
+    </form>
+    <table class="#01579b light-blue darken-4 striped">
+      <thead>
+        <tr><th style="color:white">Viewing Date:</th><th style="color:white">Movie Snack:</th></tr>
+      </thead>
+      <tbody>
+        {% for viewing in movie.viewing_set.all %}
+          <tr>
+            <td style="color:white">{{viewing.date}}</td>
+            <td style="color:white">{{viewing.get_snack_display}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row">
+    <div class="col s6">
+      <h3>{{ movie.title }} Comments</h3>
+  
+      {% if movie.comments.count %} {% for comment in movie.comments.all %}
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">
+            <!-- Took this style ' style="color: {{toy.color}}"' out of the below span as it was giving an error -->
+            <span>{{ comment.comment }}</span>
+          </span>
+        </div>
+      </div>
+      {% endfor %} {% else %}
+      <h5>No Comments</h5>
+  
+      {% endif %}
+    </div>
+
+  <div class="col s6">
+    <h3>Available Comments</h3>
+
+    {% if comments.count %} {% for comment in comments.all %}
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">
+          <span> {{ comment.comment }}</span>
+        </span>
+      </div>
+
+      <div class="card-action">
+        <form action="{% url 'assoc_comment' movie.id comment.id %}" method="POST">
+          {% csrf_token %}
+          <button type="submit" class="btn waves-effect waves-light">Add Comment</button>
+        </form>
+      </div>
+    </div>
+    {% endfor %} {% else %}
+
+    <h5>{{movie.title}} Already has all comments available</h5>
+    {% endif %}
+  </div>
+
+</div>
+<script>
+var dateEl = document.getElementById('id_date');
+  M.Datepicker.init(dateEl, {
+    format: 'yyyy-mm-dd',
+    defaultDate: new Date(),
+    setDefaultDate: true,
+    autoClose: true
+  });
+var selectEl = document.getElementById('id_snack');
+  M.FormSelect.init(selectEl);
+</script>
+{% endblock %}
