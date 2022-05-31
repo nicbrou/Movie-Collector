@@ -2,7 +2,7 @@
 
 <h1>Comment List</h1>
 
-{% for comment in comments_list %}
+{% for comment in comments %}
   <div class="card">
     <a href="{% url 'comments_detail' comment.id %}"></a>
     <div class="card-content">

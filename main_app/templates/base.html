@@ -34,12 +34,21 @@
             <li><a href="{% url 'about' %}">What is Movie Collector?</a></li>
 
             {% if user.is_authenticated %}
+            <!-- <select name="Movies" class="form-control">
+              <option value="1">Add Movie</option>
+              <option value="2">All Movies</option>
+            </select>
+            <select name="Comments" class="form-control">
+              <option value="1">Create Comment</option>
+              <option value="2">All Comments</option>
+            </select> -->
+
             <li>
               <a href="{% url 'movies_create' %}">Add Movie</a>
             </li>
             <li><a href="{% url 'index' %}">All Movies</a></li>
             <li>
-              <a href="{% url 'comments_create' %}">Create Comment!</a>
+              <a href="{% url 'comments_create' %}">Create Comment</a>
             </li>
             <li>
               <a href="{% url 'comments_index' %}">All Comments</a>

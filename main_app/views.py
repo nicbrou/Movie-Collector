@@ -24,6 +24,9 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+def showList(request):
+  return render(request, "home.html")
+
 
 @login_required
 def movies_index(request):
@@ -56,8 +59,16 @@ class MovieDelete(LoginRequiredMixin, DeleteView):
   model = Movie
   success_url = '/movies/'
 
-class CommentList(LoginRequiredMixin, ListView):
-  model = Comment
+# class CommentList(LoginRequiredMixin, ListView):
+#   model = Comment
+#   fields = '__all__'
+
+@login_required
+def comments_index(request):
+  comments = Comment.objects.all()
+  # comments = Movie.objects.filter(user = request.user)
+  return render(request, 'main_app/comment_list.html', {'comments': comments})
+
 
 class CommentDetail(DetailView):
   model = Comment

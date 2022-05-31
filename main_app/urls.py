@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name="home"),
+    path("showList/", views.showList, name="showList"),
     path('about/', views.about, name="about"),
     path('movies/', views.movies_index, name='index'),
     path('movies/<int:movie_id>/', views.movies_detail, name='detail'),
@@ -13,7 +14,8 @@ urlpatterns = [
     path('movies/<int:movie_id>/add_viewing/', views.add_viewing, name='add_viewing'),
 
     # Comments CRUD operations
-    path('comments/', views.CommentList.as_view(), name="comments_index"),
+    # path('comments/', views.CommentList.as_view(), name="comments_index"),
+    path('comments/', views.comments_index, name="comments_index"),
     path('comments/<int:pk>/', views.CommentDetail.as_view(), name="comments_detail"),
     path('comments/create/', views.CommentCreate.as_view(), name="comments_create"),
     path('comments/<int:pk>/update/', views.CommentUpdate.as_view(), name="comments_update"),
